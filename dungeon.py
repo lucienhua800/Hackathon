@@ -5,6 +5,8 @@ from object import *
 import random
 from random import Random as rnd
 
+global game
+game = True
 class room:
     def __init__(self, level, number_monster, number_objects, lx,ly):
         self.level = level
@@ -46,8 +48,8 @@ class room:
 salletest=room(5,0,0,30,30)
 
 
-W, H = 20, 20
-X, Y = 30, 30
+W, H = 20,20
+X, Y = 30,30
 
 # définition de la gridarray:
 tiret=[1,1,1,1,1,1,1,1,0,0]
@@ -93,13 +95,14 @@ def draw_tile(x, y, color):
     rect = pg.Rect(x*W, y*H, W, H)
     pg.draw.rect(screen, color, rect)
 player = Personnage([0,0])
-keys = pg.key.get_pressed()
-player.move(keys)
 
-running = True
-while running:
-
-    clock.tick(4)
+sleep = False
+while game :
+    clock.tick(10)
+    keys = pg.key.get_pressed()
+    player.move(keys)
+    for numM in range(nbM):
+        monsters[numM].attack()
     draw_background()
     pg.display.update()
 
