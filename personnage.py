@@ -57,14 +57,14 @@ def combatPhase(p,o):
         clock = pg.time.Clock()
         clock.tick(10)
         keys = pg.key.get_pressed()
-        if keys == "x":
+        if keys[pg.K_x]:
             p.attack(o)
         o.attack(p)
         if (not o.alive()):
             fight = False
         elif (not p.alive()) :
-            pass 
-            #TODO
+            game = False
+            print("Game over !")
             
     
     
