@@ -10,6 +10,7 @@ object_list = []
 
 global game
 game = True
+
 class room:
     def __init__(self, level, number_monster, number_objects, lx,ly):
         self.level = level
@@ -57,8 +58,6 @@ X, Y = 30,30
 # définition de la gridarray:
 tiret=[1,1,1,1,1,1,1,1,0,0]
 salle1=[tiret*30,tiret*30,[0,0,0,0,0,0,0,0,0,0]*30,[0,0,0,0,0,0,0,0,0,0]*30,tiret*30,tiret*30]
-
-
 
 
 WHITE = (240, 240, 240)
