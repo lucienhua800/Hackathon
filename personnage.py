@@ -1,3 +1,4 @@
+from re import A
 import pygame as pg 
 
 
@@ -7,36 +8,18 @@ class Personnage:
         self.hp = hp
         self.armor = armor
         self.weapon = weapon
-        self.damage = damage
-        
-    
+        self.damage = damage    
     def takeHit(self,extDamage):
-        self.hp -= extDamage
+        diff = (extDamage - self.armor)
+        if diff > 0 : 
+            self.hp -= diff
         if (self.hp < 0):
             alive = False
-            
-
     def attack(self, other):
         other.takeHit(self.damage)
-
-    # def move(self,keys):
-        
-    #     if keys == "left":
-    #         self.position[0] -= 1
-
-    #     if keys == "right":
-    #         self.position[0] += 1
-      
-    #     if keys == "up":
-    #         self.position[1] += 1
-      
-    #     if keys == "down":
-    #         self.position[1] -= 1
-    
     def changeRoom(self,door):
         self.position = [door[0], door[1]]
             
-    
 class Player(Personnage): 
     def __init__(self,position = [0,0],hp = 100,armor = 0,weapon = "basic knife",damage = 10, mana = 200, inventory = [], gold = 0):
         self.hp = hp
@@ -46,24 +29,18 @@ class Player(Personnage):
         self.mana = mana 
         self.inventory = inventory
         self.gold = gold
-
-
     def openInventory(self):
         for i in range(len(self.inventory)):
-            print(f"Object n°{i} : {self.inventory[i]}"  )
+            print(f"Object n°{i} : Type = {self.inventory[i][0]}, Value = {self.inventory[i][1]}"  )
         print("use an object by writing its number, or press another key to close inventory")
         inp = int(input)
         if inp < len(self.inventory):
             if self.inventory[inp][0] == "Weapon" : 
-                self.weapon = self.inventory[inp][1]
-                self.damage = self.inventory[inp][2]
+                self.damage = self.inventory[inp][1]
             elif self.inventory[inp][0] == "Potion" : 
                 self.hp += self.inventory[inp][1]
             elif self.inventory[inp][0] == "Armor" : 
                 self.armor = self.inventory[inp][1]
-
-
-        
 
 class Monstre(Personnage):
     def __init__(self,name,position,hp = 100,armor = 0,weapon = "basic knife",damage = 10, alive = True):
@@ -73,8 +50,6 @@ class Monstre(Personnage):
         self.weapon = weapon
         self.damage = damage
         self.alive = True
-
-
 
 def combatPhase(p,o):
     fight = True

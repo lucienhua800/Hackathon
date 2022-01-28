@@ -6,6 +6,7 @@ from object import *
 import random
 from random import Random as rnd
 
+
 global game
 game = True
 class room:
@@ -106,6 +107,8 @@ def update_position(pos,keys):
         pos[0]-=1
     if keys[pg.K_DOWN]:
         pos[1]-=1
+    if keys[pg.K_a]:
+        Player.openInventory()
     return pos
 
 sleep = False
