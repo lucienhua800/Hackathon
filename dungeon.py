@@ -1,3 +1,4 @@
+from turtle import update
 import pygame as pg
 import numpy as np
 from personnage import * 
@@ -96,11 +97,28 @@ def draw_tile(x, y, color):
     pg.draw.rect(screen, color, rect)
 player = Personnage([0,0])
 
+def update_position(pos,keys):
+    if keys[pg.K_LEFT]:
+        pos[0]+=1
+    if keys[pg.K_RIGHT]:
+        pos[1]+=1
+    if keys[pg.K_UP]:
+        pos[0]-=1
+    if keys[pg.K_DOWN]:
+        pos[1]-=1
+    return pos
+
 sleep = False
 while game :
     clock.tick(10)
     keys = pg.key.get_pressed()
-    player.move(keys)
+    next_pos = update_position(player.position,keys)
+    if map[next_pos] == '.':
+        player.position = next_pos
+    elif map[next_pos] == "-":
+        pass #ne rien faire
+    elif 
+
     for numM in range(nbM):
         monsters[numM].attack()
     draw_background()
