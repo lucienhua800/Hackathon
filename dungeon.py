@@ -6,6 +6,7 @@ from object import *
 import random
 from random import Random as rnd
 
+object_list = []
 
 global game
 game = True
@@ -116,17 +117,24 @@ while game :
     clock.tick(10)
     keys = pg.key.get_pressed()
     next_pos = update_position(player.position,keys)
-    if map[next_pos] == '.':
+    if carte[next_pos] == '.':
         player.position = next_pos
-    elif map[next_pos] == "-":
+    elif carte[next_pos] == "-":
         pass #ne rien faire
-    elif map[next_pos] in object_list :
-        player.inventory.append()
-    elif map[next_pos] == "m":
-        combat_phase(player,)
+    elif carte[next_pos] == "O" :
+        otype = rnd.randint(1,4)
+        if otype == 1 : #or
+            player.gold += rnd.randint(10,100)
+        elif otype == 2: #potion
+            player.inventory.append(["Potion",rnd.randint(10,50)])
+        elif otype == 3: #armor
+            player.inventory.append(["Armor",rnd.randint(5,10)])
+        elif otype == 4: #weapon
+            player.inventory.append(["Weapon",rnd.randint(20,30)])
+    elif carte[next_pos] == "m":
+        monster = Monstre("Goblin",next_pos,hp = rnd.randint(50,80))
+        combatPhase(player,monster)
 
-    for numM in range(nbM):
-        monsters[numM].attack()
     draw_background()
     pg.display.update()
 
