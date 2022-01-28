@@ -117,7 +117,10 @@ while game :
         player.position = next_pos
     elif map[next_pos] == "-":
         pass #ne rien faire
-    elif 
+    elif map[next_pos] in object_list :
+        player.inventory.append()
+    elif map[next_pos] == "m":
+        combat_phase(player,)
 
     for numM in range(nbM):
         monsters[numM].attack()
