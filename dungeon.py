@@ -39,6 +39,9 @@ def draw_tile(x, y, color):
     """
     rect = pg.Rect(x*W, y*H, W, H)
     pg.draw.rect(screen, color, rect)
+player = Personnage([0,0])
+keys = pg.key.get_pressed()
+player.move(keys)
 
 running = True
 while running:

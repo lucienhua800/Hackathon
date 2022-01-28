@@ -20,18 +20,18 @@ class Personnage:
     def attack(self, other, damage):
         other.takeHit(damage)
 
-    def move(self):
-        keys = pg.key.get_pressed()
-        if keys[pg.K_LEFT]:
+    def move(self,keys):
+        
+        if keys == "left":
             self.position[0] -= 1
 
-        if keys[pg.K_RIGHT]:
+        if keys == "right":
             self.position[0] += 1
       
-        if keys[pg.K_UP]:
+        if keys == "up":
             self.position[1] += 1
       
-        if keys[pg.K_DOWN]:
+        if keys == "down":
             self.position[1] -= 1
     
     def changeRoom(self,door):
