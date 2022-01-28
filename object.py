@@ -10,15 +10,13 @@ class Gold(Object) :
 class Weapon(Object):
     def __repr__(self):
         return f"{self.name} with {self.value} ATT"
+    def use(self):
+
 
 class Potion(Object):
     def __repr__(self):
         return f"health potion with {self.value} HP"
 
 class Armor(Object):
-    def __repr__(self):
-        return f"{self.name} with {self.value} DEF"
-
-class Helmet(Object):
     def __repr__(self):
         return f"{self.name} with {self.value} DEF"

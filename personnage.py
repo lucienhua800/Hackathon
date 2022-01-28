@@ -2,7 +2,7 @@ import pygame as pg
 
 
 class Personnage:
-    def __init__(self,position,hp = 100,armor = 0,weapon = "basic knife",damage = 10):
+    def __init__(self,position,hp = 100,armor = 0,weapon = "basic knife",damage = 10, alive = True):
         self.position = position
         self.hp = hp
         self.armor = armor
@@ -13,25 +13,25 @@ class Personnage:
     def takeHit(self,extDamage):
         self.hp -= extDamage
         if (self.hp < 0):
-            game = False
-            print("Game Over")
+            alive = False
+            
 
-    def attack(self, other, damage):
-        other.takeHit(damage)
+    def attack(self, other):
+        other.takeHit(self.damage)
 
-    def move(self,keys):
+    # def move(self,keys):
         
-        if keys == "left":
-            self.position[0] -= 1
+    #     if keys == "left":
+    #         self.position[0] -= 1
 
-        if keys == "right":
-            self.position[0] += 1
+    #     if keys == "right":
+    #         self.position[0] += 1
       
-        if keys == "up":
-            self.position[1] += 1
+    #     if keys == "up":
+    #         self.position[1] += 1
       
-        if keys == "down":
-            self.position[1] -= 1
+    #     if keys == "down":
+    #         self.position[1] -= 1
     
     def changeRoom(self,door):
         self.position = [door[0], door[1]]
@@ -47,14 +47,52 @@ class Player(Personnage):
         self.inventory = inventory
         self.gold = gold
 
-    # def openInventory(self):
-    #     #Montre l'inventaire 
-    #     #TODO
-    # def useObject(self):
-    #     #TODO
+
+    def openInventory(self):
+        for i in range(len(self.inventory)):
+            print(f"Object n°{i} : {self.inventory[i]}"  )
+        print("use an object by writing its number, or press another key to close inventory")
+        inp = int(input)
+        if inp < len(self.inventory):
+            if self.inventory[inp][0] == "Weapon" : 
+                self.weapon = self.inventory[inp][1]
+                self.damage = self.inventory[inp][2]
+            elif self.inventory[inp][0] == "Potion" : 
+                self.hp += self.inventory[inp][1]
+            elif self.inventory[inp][0] == "Armor" : 
+                self.armor = self.inventory[inp][1]
+
+
+        
+
+class Monstre(Personnage):
+    def __init__(self,name,position,hp = 100,armor = 0,weapon = "basic knife",damage = 10, alive = True):
+        self.position = position
+        self.hp = hp
+        self.armor = armor
+        self.weapon = weapon
+        self.damage = damage
+        self.alive = True
 
 
 
+def combatPhase(p,o):
+    fight = True
+    while fight : 
+        clock = pg.time.Clock()
+        clock.tick(10)
+        keys = pg.key.get_pressed()
+        if keys == "x":
+            p.attack(o)
+        o.attack(p)
+        if (not o.alive()):
+            fight = False
+        elif (not p.alive()) :
+            pass 
+            #TODO
+            
+    
+    
 
 
 
