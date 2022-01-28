@@ -1,9 +1,10 @@
 import pygame as pg 
 game = True
-keys = pg.key.get_pressed()
+
 
 class Personnage:
-    def __init__(self,position = [0,0],hp = 100,armor = 0,weapon = "basic knife",damage = 10):
+    def __init__(self,position,hp = 100,armor = 0,weapon = "basic knife",damage = 10):
+        self.position = position
         self.hp = hp
         self.armor = armor
         self.weapon = weapon
@@ -16,10 +17,11 @@ class Personnage:
             game = False
             print("Game Over")
 
-    def attack(damage):
-        pass
+    def attack(self, other, damage):
+        other.takeHit(damage)
 
     def move(self):
+        keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
             self.position[0] -= 1
 
@@ -31,6 +33,9 @@ class Personnage:
       
         if keys[pg.K_DOWN]:
             self.position[1] -= 1
+    
+    def changeRoom(self,door):
+        self.position = [door[0], door[1]]
             
     
 class Player(Personnage): 

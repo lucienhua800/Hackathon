@@ -1,6 +1,8 @@
 import pygame as pg
 from random import randint
 import numpy as np
+from personnage import * 
+from object import * 
 W, H = 20, 20
 X, Y = 30, 30
 
