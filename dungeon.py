@@ -115,11 +115,11 @@ while game :
     clock.tick(10)
     keys = pg.key.get_pressed()
     next_pos = update_position(player.position,keys)
-    if map[next_pos] == '.':
+    if carte[next_pos] == '.':
         player.position = next_pos
-    elif map[next_pos] == "-":
+    elif carte[next_pos] == "-":
         pass #ne rien faire
-    elif map[next_pos] == "O" :
+    elif carte[next_pos] == "O" :
         otype = rnd.randint(1,4)
         if otype == 1 : #or
             player.gold += rnd.randint(10,100)
@@ -129,9 +129,9 @@ while game :
             player.inventory.append(["Armor",rnd.randint(5,10)])
         elif otype == 4: #weapon
             player.inventory.append(["Weapon",rnd.randint(20,30)])
-    elif map[next_pos] == "m":
+    elif carte[next_pos] == "m":
         monster = Monstre("Goblin",next_pos,hp = rnd.randint(50,80))
-        combat_phase(player,monster)
+        combatPhase(player,monster)
 
     draw_background()
     pg.display.update()
